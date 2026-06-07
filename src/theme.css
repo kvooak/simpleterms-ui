@@ -1,0 +1,208 @@
+/*
+ * simpleterms-ui — brutalist Win2000/IBM flat design system.
+ * Import from the consumer's main CSS, AFTER `@import 'tailwindcss';`:
+ *
+ *   @import 'tailwindcss';
+ *   @import 'simpleterms-ui/theme.css';
+ *   @source '../node_modules/simpleterms-ui/dist';
+ *
+ * The `@source` line makes Tailwind scan the component classes.
+ */
+@import '@fontsource-variable/ibm-plex-sans';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-surface-command-bar: var(--surface-command-bar);
+  --color-surface-column: var(--surface-column);
+  --color-surface-dialog-header: var(--surface-dialog-header);
+  --color-signal-success: var(--signal-success);
+  --color-signal-warning: var(--signal-warning);
+  --color-signal-error: var(--signal-error);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --font-sans: 'IBM Plex Sans Variable', sans-serif;
+}
+
+:root {
+  --radius: 0rem;
+  --background: oklch(0.95 0.006 80);
+  --foreground: oklch(0.21 0.005 80);
+  --card: oklch(0.94 0.006 80);
+  --card-foreground: oklch(0.21 0.005 80);
+  --popover: oklch(0.915 0.008 80);
+  --popover-foreground: oklch(0.21 0.005 80);
+  --primary: oklch(0.49 0.15 250);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.89 0.008 80);
+  --secondary-foreground: oklch(0.21 0.005 80);
+  --muted: oklch(0.89 0.008 80);
+  --muted-foreground: oklch(0.55 0.005 80);
+  --accent: oklch(0.865 0.01 80);
+  --accent-foreground: oklch(0.21 0.005 80);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.78 0.005 80);
+  --input: oklch(0.72 0.005 80);
+  --ring: oklch(0.49 0.15 250);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --surface-command-bar: oklch(0.935 0.006 80);
+  --surface-column: oklch(0.93 0.006 80);
+  --surface-dialog-header: oklch(0.88 0.008 80);
+  --sidebar: oklch(0.93 0.006 80);
+  --sidebar-foreground: oklch(0.21 0.005 80);
+  --sidebar-primary: oklch(0.49 0.15 250);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.865 0.01 80);
+  --sidebar-accent-foreground: oklch(0.21 0.005 80);
+  --sidebar-border: oklch(0.78 0.005 80);
+  --sidebar-ring: oklch(0.49 0.15 250);
+  --signal-success: oklch(0.55 0.15 150);
+  --signal-warning: oklch(0.72 0.14 70);
+  --signal-error: oklch(0.55 0.2 25);
+}
+
+.dark {
+  --background: oklch(0.16 0.006 260);
+  --foreground: oklch(0.88 0.006 260);
+  --card: oklch(0.2 0.008 260);
+  --card-foreground: oklch(0.88 0.006 260);
+  --popover: oklch(0.2 0.008 260);
+  --popover-foreground: oklch(0.88 0.006 260);
+  --primary: oklch(0.6 0.15 250);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.24 0.008 260);
+  --secondary-foreground: oklch(0.85 0.006 260);
+  --muted: oklch(0.24 0.008 260);
+  --muted-foreground: oklch(0.58 0.008 260);
+  --accent: oklch(0.26 0.01 260);
+  --accent-foreground: oklch(0.88 0.006 260);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(0.3 0.01 260);
+  --input: oklch(0.32 0.012 260);
+  --ring: oklch(0.6 0.15 250);
+  --chart-1: oklch(0.72 0.12 250);
+  --chart-2: oklch(0.62 0.18 255);
+  --chart-3: oklch(0.55 0.2 258);
+  --chart-4: oklch(0.5 0.2 260);
+  --chart-5: oklch(0.45 0.17 262);
+  --surface-command-bar: oklch(0.19 0.006 260);
+  --surface-column: oklch(0.18 0.006 260);
+  --surface-dialog-header: oklch(0.22 0.006 260);
+  --sidebar: oklch(0.14 0.006 260);
+  --sidebar-foreground: oklch(0.88 0.006 260);
+  --sidebar-primary: oklch(0.6 0.15 250);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.26 0.01 260);
+  --sidebar-accent-foreground: oklch(0.88 0.006 260);
+  --sidebar-border: oklch(0.28 0.01 260);
+  --sidebar-ring: oklch(0.6 0.15 250);
+  --signal-success: oklch(0.6 0.14 150);
+  --signal-warning: oklch(0.74 0.14 70);
+  --signal-error: oklch(0.6 0.18 25);
+}
+
+/* Sonner toast overrides — match brutalist theme */
+[data-sonner-toaster] {
+  --border-radius: 0px;
+  --normal-bg: var(--card);
+  --normal-border: var(--border);
+  --normal-text: var(--foreground);
+  font-family: 'IBM Plex Sans Variable', sans-serif;
+}
+
+[data-sonner-toast] {
+  box-shadow: none;
+}
+
+/* Sidebar gradient — subtle top-to-bottom lightness shift */
+[data-sidebar='sidebar'] > nav[data-slot='sidebar-inner'] {
+  background: linear-gradient(to bottom, oklch(0.94 0.006 80) 0%, oklch(0.92 0.006 80) 100%);
+}
+.dark [data-sidebar='sidebar'] > nav[data-slot='sidebar-inner'] {
+  background: linear-gradient(to bottom, oklch(0.16 0.006 260) 0%, oklch(0.12 0.006 260) 100%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  /* Brutalist flat UI: state changes are instant. Hover feedback stays
+     (the end colour applies immediately); only the transition/animation
+     time is removed, everywhere. Keyframe animations (spinners, overlay
+     enter/exit) are intentionally untouched. */
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+  }
+  body {
+    @apply font-sans bg-background text-foreground text-base;
+  }
+
+  html {
+    scrollbar-width: none;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+    @apply font-sans;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  /* Flat surfaces — no elevation shadow. Kept as a single class so the
+     panels/cards that reference it share one control point. */
+  .card-elevated {
+    box-shadow: none;
+  }
+}

@@ -205,9 +205,13 @@ function DropdownSelect<T extends string = string>({
   const internalValue = toInternalValue(value);
 
   function handleChange(v: string): void {
-    // Safe cast: Radix Select only returns values from the options array,
-    // which are typed as T in the options prop.
-    onValueChange(toExternalValue(v) as T);
+    // Radix only emits values from our options array, so resolve the raw
+    // string back to its typed option instead of casting it to T.
+    const external = toExternalValue(v);
+    const match = options
+      .flatMap((item) => (isGroup(item) ? item.options : [item]))
+      .find((option) => option.value === external);
+    if (match !== undefined) onValueChange(match.value);
   }
 
   return (

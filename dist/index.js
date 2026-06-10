@@ -51,7 +51,7 @@ var badgeVariants = cva(
       size: {
         default: "text-base px-2 py-0.5",
         sm: "text-sm px-1.5 py-0.5",
-        xs: "text-[12px] px-1 py-0"
+        xs: "text-sm px-1 py-0"
       }
     },
     defaultVariants: {
@@ -85,7 +85,7 @@ import { Loader2 } from "lucide-react";
 import { Slot as Slot2 } from "radix-ui";
 import { Fragment, jsx as jsx2, jsxs } from "react/jsx-runtime";
 var buttonVariants = cva2(
-  "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-none border border-transparent bg-clip-padding text-xs font-medium transition-colors focus-visible:ring-1 aria-invalid:ring-1 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-70 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
+  "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-none border border-transparent bg-clip-padding text-sm font-medium transition-colors focus-visible:ring-1 aria-invalid:ring-1 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-70 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
   {
     variants: {
       variant: {
@@ -948,7 +948,9 @@ function DropdownSelect({
 }) {
   const internalValue = toInternalValue(value);
   function handleChange(v) {
-    onValueChange(toExternalValue(v));
+    const external = toExternalValue(v);
+    const match = options.flatMap((item) => isGroup(item) ? item.options : [item]).find((option) => option.value === external);
+    if (match !== void 0) onValueChange(match.value);
   }
   return /* @__PURE__ */ jsxs10(Select, { value: internalValue, onValueChange: handleChange, disabled, children: [
     /* @__PURE__ */ jsx18(SelectTrigger, { showChevron, className, style, "aria-label": ariaLabel, children: /* @__PURE__ */ jsx18(SelectValue, { placeholder }) }),
@@ -1107,7 +1109,7 @@ function TooltipContent({
       "data-slot": "tooltip-content",
       sideOffset,
       className: cn(
-        "bg-foreground text-background z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance",
+        "bg-foreground text-background z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-sm text-balance",
         className
       ),
       ...props,
@@ -1448,7 +1450,7 @@ function SidebarGroupLabel({
       "data-slot": "sidebar-group-label",
       "data-sidebar": "group-label",
       className: cn(
-        "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-sm font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
       ),
@@ -1521,7 +1523,7 @@ var sidebarMenuButtonVariants = cva3(
       },
       size: {
         default: "h-10 text-sm",
-        sm: "h-9 text-xs",
+        sm: "h-9 text-sm",
         lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!"
       }
     },
@@ -1600,7 +1602,7 @@ function SidebarMenuBadge({ className, ...props }) {
       "data-slot": "sidebar-menu-badge",
       "data-sidebar": "menu-badge",
       className: cn(
-        "text-sidebar-foreground pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none",
+        "text-sidebar-foreground pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-sm font-medium tabular-nums select-none",
         "peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground",
         "group-data-[collapsible=icon]:hidden",
         className
@@ -1684,7 +1686,7 @@ function SidebarMenuSubButton({
       className: cn(
         "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-8 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
         "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
-        size === "sm" && "text-xs",
+        size === "sm" && "text-sm",
         size === "md" && "text-sm",
         "group-data-[collapsible=icon]:hidden",
         className
@@ -1698,9 +1700,9 @@ function SidebarMenuSubButton({
 import { jsx as jsx24, jsxs as jsxs14 } from "react/jsx-runtime";
 function StatCard({ label, value, sub }) {
   return /* @__PURE__ */ jsxs14("div", { className: "border border-border bg-card px-5 py-4 card-elevated", children: [
-    /* @__PURE__ */ jsx24("div", { className: "text-xs text-muted-foreground uppercase tracking-wide", children: label }),
+    /* @__PURE__ */ jsx24("div", { className: "text-sm text-muted-foreground uppercase tracking-wide", children: label }),
     /* @__PURE__ */ jsx24("div", { className: "text-2xl font-semibold mt-1", children: value }),
-    sub !== void 0 && /* @__PURE__ */ jsx24("div", { className: "text-xs text-muted-foreground mt-0.5", children: sub })
+    sub !== void 0 && /* @__PURE__ */ jsx24("div", { className: "text-sm text-muted-foreground mt-0.5", children: sub })
   ] });
 }
 

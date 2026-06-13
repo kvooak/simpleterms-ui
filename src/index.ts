@@ -26,6 +26,7 @@ export * from './components/skeleton';
 export * from './components/stat-card';
 export * from './components/switch';
 export * from './components/tab-nav';
+export * from './components/table';
 export * from './components/tabs';
 export * from './components/textarea';
 export * from './components/tooltip';

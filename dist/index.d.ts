@@ -420,6 +420,25 @@ interface ButtonTabNavProps {
 }
 declare function ButtonTabNav({ value, onValueChange, items, ariaLabel }: ButtonTabNavProps): React.JSX.Element;
 
+type CellAlign = 'left' | 'right' | 'center';
+/**
+ * Flat, borderless-frame data table. Wraps the `<table>` in a horizontal-scroll
+ * container so it never overflows its panel. Compose with the cell parts below.
+ */
+declare function Table({ className, wrapperClassName, ...props }: React$1.ComponentProps<'table'> & {
+    wrapperClassName?: string;
+}): React$1.JSX.Element;
+declare function TableHeader({ className, ...props }: React$1.ComponentProps<'thead'>): React$1.JSX.Element;
+declare function TableBody({ className, ...props }: React$1.ComponentProps<'tbody'>): React$1.JSX.Element;
+declare function TableFooter({ className, ...props }: React$1.ComponentProps<'tfoot'>): React$1.JSX.Element;
+declare function TableRow({ className, ...props }: React$1.ComponentProps<'tr'>): React$1.JSX.Element;
+declare function TableHead({ className, align, ...props }: Omit<React$1.ComponentProps<'th'>, 'align'> & {
+    align?: CellAlign;
+}): React$1.JSX.Element;
+declare function TableCell({ className, align, ...props }: Omit<React$1.ComponentProps<'td'>, 'align'> & {
+    align?: CellAlign;
+}): React$1.JSX.Element;
+
 declare function Tabs({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.Root>): React$1.JSX.Element;
 declare function TabsList({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.List>): React$1.JSX.Element;
 declare function TabsTrigger({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.Trigger>): React$1.JSX.Element;
@@ -427,4 +446,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, StandardButton, StatCard, Switch, TabNav, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };

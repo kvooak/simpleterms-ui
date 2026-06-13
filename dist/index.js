@@ -1802,14 +1802,76 @@ function ButtonTabNav({ value, onValueChange, items, ariaLabel }) {
   )) });
 }
 
+// src/components/table.tsx
+import { jsx as jsx28 } from "react/jsx-runtime";
+var ALIGN_CLASS = {
+  left: "text-left",
+  right: "text-right",
+  center: "text-center"
+};
+function Table({ className, wrapperClassName, ...props }) {
+  return /* @__PURE__ */ jsx28("div", { "data-slot": "table-wrapper", className: cn("w-full overflow-x-auto", wrapperClassName), children: /* @__PURE__ */ jsx28("table", { "data-slot": "table", className: cn("w-full border-collapse text-sm", className), ...props }) });
+}
+function TableHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsx28("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b [&_tr]:border-border", className), ...props });
+}
+function TableBody({ className, ...props }) {
+  return /* @__PURE__ */ jsx28("tbody", { "data-slot": "table-body", className: cn("[&_tr:last-child]:border-0", className), ...props });
+}
+function TableFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsx28(
+    "tfoot",
+    {
+      "data-slot": "table-footer",
+      className: cn("border-t border-border font-semibold [&_tr]:border-0", className),
+      ...props
+    }
+  );
+}
+function TableRow({ className, ...props }) {
+  return /* @__PURE__ */ jsx28(
+    "tr",
+    {
+      "data-slot": "table-row",
+      className: cn("border-b border-border/50 transition-colors hover:bg-muted/40", className),
+      ...props
+    }
+  );
+}
+function TableHead({
+  className,
+  align = "left",
+  ...props
+}) {
+  return /* @__PURE__ */ jsx28(
+    "th",
+    {
+      "data-slot": "table-head",
+      className: cn(
+        "px-3 py-2 font-semibold text-xs uppercase tracking-wider text-muted-foreground whitespace-nowrap",
+        ALIGN_CLASS[align],
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableCell({
+  className,
+  align = "left",
+  ...props
+}) {
+  return /* @__PURE__ */ jsx28("td", { "data-slot": "table-cell", className: cn("px-3 py-2 align-top", ALIGN_CLASS[align], className), ...props });
+}
+
 // src/components/tabs.tsx
 import { Tabs as TabsPrimitive } from "radix-ui";
-import { jsx as jsx28 } from "react/jsx-runtime";
+import { jsx as jsx29 } from "react/jsx-runtime";
 function Tabs({ className, ...props }) {
-  return /* @__PURE__ */ jsx28(TabsPrimitive.Root, { "data-slot": "tabs", className, ...props });
+  return /* @__PURE__ */ jsx29(TabsPrimitive.Root, { "data-slot": "tabs", className, ...props });
 }
 function TabsList({ className, ...props }) {
-  return /* @__PURE__ */ jsx28(
+  return /* @__PURE__ */ jsx29(
     TabsPrimitive.List,
     {
       "data-slot": "tabs-list",
@@ -1822,7 +1884,7 @@ function TabsList({ className, ...props }) {
   );
 }
 function TabsTrigger({ className, ...props }) {
-  return /* @__PURE__ */ jsx28(
+  return /* @__PURE__ */ jsx29(
     TabsPrimitive.Trigger,
     {
       "data-slot": "tabs-trigger",
@@ -1840,13 +1902,13 @@ function TabsTrigger({ className, ...props }) {
   );
 }
 function TabsContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx28(TabsPrimitive.Content, { "data-slot": "tabs-content", className: cn("flex-1 outline-none", className), ...props });
+  return /* @__PURE__ */ jsx29(TabsPrimitive.Content, { "data-slot": "tabs-content", className: cn("flex-1 outline-none", className), ...props });
 }
 
 // src/components/textarea.tsx
-import { jsx as jsx29 } from "react/jsx-runtime";
+import { jsx as jsx30 } from "react/jsx-runtime";
 function Textarea({ className, ...props }) {
-  return /* @__PURE__ */ jsx29(
+  return /* @__PURE__ */ jsx30(
     "textarea",
     {
       "data-slot": "textarea",
@@ -1941,6 +2003,13 @@ export {
   StatCard,
   Switch,
   TabNav,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
   Tabs,
   TabsContent,
   TabsList,

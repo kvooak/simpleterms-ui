@@ -1,7 +1,10 @@
+import { ArrowDown, ArrowUp, ChevronRight, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 import { cn } from '../lib/utils';
 
 type CellAlign = 'left' | 'right' | 'center';
+
+type SortDirection = 'asc' | 'desc';
 
 const ALIGN_CLASS: Record<CellAlign, string> = {
   left: 'text-left',
@@ -75,4 +78,108 @@ function TableCell({
   return <td data-slot="table-cell" className={cn('px-3 py-2 align-top', ALIGN_CLASS[align], className)} {...props} />;
 }
 
-export { Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell };
+interface SortableTableHeadProps<K extends string> {
+  label: React.ReactNode;
+  /** The column this header sorts by. */
+  sortKey: K;
+  /** Currently sorted column, or undefined when nothing is sorted. */
+  activeKey: K | undefined;
+  direction: SortDirection;
+  onSort: (key: K) => void;
+  align?: CellAlign;
+  className?: string;
+}
+
+/**
+ * Clickable column header that toggles sort direction. The whole cell is the
+ * hit target; an arrow shows the active direction, a faint up/down hints the
+ * rest are sortable. Generic over the caller's sort-key union.
+ */
+function SortableTableHead<K extends string>({
+  label,
+  sortKey,
+  activeKey,
+  direction,
+  onSort,
+  align = 'left',
+  className,
+}: SortableTableHeadProps<K>) {
+  const isActive = activeKey === sortKey;
+  return (
+    <TableHead align={align} className={cn('p-0', className)}>
+      <button
+        type="button"
+        onClick={() => {
+          onSort(sortKey);
+        }}
+        className={cn(
+          'inline-flex w-full items-center gap-1 px-3 py-2 transition-colors hover:text-foreground',
+          align === 'right' && 'flex-row-reverse',
+          align === 'center' && 'justify-center',
+          isActive && 'text-foreground'
+        )}
+      >
+        {label}
+        {isActive ? (
+          direction === 'asc' ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />
+        ) : (
+          <ChevronsUpDown className="size-3 opacity-40" />
+        )}
+      </button>
+    </TableHead>
+  );
+}
+
+interface ExpandableRowProps {
+  expanded: boolean;
+  onToggle: () => void;
+  /** Total column count INCLUDING the chevron column this adds, so the detail row spans the full width. */
+  colSpan: number;
+  /** Summary cells for the visible row (TableCell elements); the leading chevron cell is added for you. */
+  children: React.ReactNode;
+  /** Content revealed in the spanning detail row when expanded. */
+  detail: React.ReactNode;
+  className?: string;
+  detailClassName?: string;
+}
+
+/**
+ * Master-detail row: a clickable summary row with a rotating chevron, plus a
+ * full-width detail row revealed when `expanded`. Expansion state is owned by
+ * the caller (controlled), so several rows can stay open at once.
+ */
+function ExpandableRow({ expanded, onToggle, colSpan, children, detail, className, detailClassName }: ExpandableRowProps) {
+  return (
+    <>
+      <TableRow className={cn('cursor-pointer', className)} aria-expanded={expanded} onClick={onToggle}>
+        <TableCell className="w-6 pr-0">
+          <ChevronRight
+            className={cn(
+              'size-3.5 text-muted-foreground transition-transform',
+              expanded && 'rotate-90 text-foreground'
+            )}
+          />
+        </TableCell>
+        {children}
+      </TableRow>
+      {expanded && (
+        <TableRow className={cn('bg-muted/30 hover:bg-muted/30', detailClassName)}>
+          <TableCell colSpan={colSpan}>{detail}</TableCell>
+        </TableRow>
+      )}
+    </>
+  );
+}
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableHead,
+  TableCell,
+  SortableTableHead,
+  ExpandableRow,
+};
+export type { CellAlign, SortDirection };

@@ -421,6 +421,7 @@ interface ButtonTabNavProps {
 declare function ButtonTabNav({ value, onValueChange, items, ariaLabel }: ButtonTabNavProps): React.JSX.Element;
 
 type CellAlign = 'left' | 'right' | 'center';
+type SortDirection = 'asc' | 'desc';
 /**
  * Flat, borderless-frame data table. Wraps the `<table>` in a horizontal-scroll
  * container so it never overflows its panel. Compose with the cell parts below.
@@ -438,6 +439,41 @@ declare function TableHead({ className, align, ...props }: Omit<React$1.Componen
 declare function TableCell({ className, align, ...props }: Omit<React$1.ComponentProps<'td'>, 'align'> & {
     align?: CellAlign;
 }): React$1.JSX.Element;
+interface SortableTableHeadProps<K extends string> {
+    label: React$1.ReactNode;
+    /** The column this header sorts by. */
+    sortKey: K;
+    /** Currently sorted column, or undefined when nothing is sorted. */
+    activeKey: K | undefined;
+    direction: SortDirection;
+    onSort: (key: K) => void;
+    align?: CellAlign;
+    className?: string;
+}
+/**
+ * Clickable column header that toggles sort direction. The whole cell is the
+ * hit target; an arrow shows the active direction, a faint up/down hints the
+ * rest are sortable. Generic over the caller's sort-key union.
+ */
+declare function SortableTableHead<K extends string>({ label, sortKey, activeKey, direction, onSort, align, className, }: SortableTableHeadProps<K>): React$1.JSX.Element;
+interface ExpandableRowProps {
+    expanded: boolean;
+    onToggle: () => void;
+    /** Total column count INCLUDING the chevron column this adds, so the detail row spans the full width. */
+    colSpan: number;
+    /** Summary cells for the visible row (TableCell elements); the leading chevron cell is added for you. */
+    children: React$1.ReactNode;
+    /** Content revealed in the spanning detail row when expanded. */
+    detail: React$1.ReactNode;
+    className?: string;
+    detailClassName?: string;
+}
+/**
+ * Master-detail row: a clickable summary row with a rotating chevron, plus a
+ * full-width detail row revealed when `expanded`. Expansion state is owned by
+ * the caller (controlled), so several rows can stay open at once.
+ */
+declare function ExpandableRow({ expanded, onToggle, colSpan, children, detail, className, detailClassName }: ExpandableRowProps): React$1.JSX.Element;
 
 declare function Tabs({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.Root>): React$1.JSX.Element;
 declare function TabsList({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.List>): React$1.JSX.Element;
@@ -446,4 +482,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };

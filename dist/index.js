@@ -1803,7 +1803,8 @@ function ButtonTabNav({ value, onValueChange, items, ariaLabel }) {
 }
 
 // src/components/table.tsx
-import { jsx as jsx28 } from "react/jsx-runtime";
+import { ArrowDown, ArrowUp, ChevronRight as ChevronRight2, ChevronsUpDown } from "lucide-react";
+import { Fragment as Fragment4, jsx as jsx28, jsxs as jsxs17 } from "react/jsx-runtime";
 var ALIGN_CLASS = {
   left: "text-left",
   right: "text-right",
@@ -1862,6 +1863,53 @@ function TableCell({
   ...props
 }) {
   return /* @__PURE__ */ jsx28("td", { "data-slot": "table-cell", className: cn("px-3 py-2 align-top", ALIGN_CLASS[align], className), ...props });
+}
+function SortableTableHead({
+  label,
+  sortKey,
+  activeKey,
+  direction,
+  onSort,
+  align = "left",
+  className
+}) {
+  const isActive = activeKey === sortKey;
+  return /* @__PURE__ */ jsx28(TableHead, { align, className: cn("p-0", className), children: /* @__PURE__ */ jsxs17(
+    "button",
+    {
+      type: "button",
+      onClick: () => {
+        onSort(sortKey);
+      },
+      className: cn(
+        "inline-flex w-full items-center gap-1 px-3 py-2 transition-colors hover:text-foreground",
+        align === "right" && "flex-row-reverse",
+        align === "center" && "justify-center",
+        isActive && "text-foreground"
+      ),
+      children: [
+        label,
+        isActive ? direction === "asc" ? /* @__PURE__ */ jsx28(ArrowUp, { className: "size-3" }) : /* @__PURE__ */ jsx28(ArrowDown, { className: "size-3" }) : /* @__PURE__ */ jsx28(ChevronsUpDown, { className: "size-3 opacity-40" })
+      ]
+    }
+  ) });
+}
+function ExpandableRow({ expanded, onToggle, colSpan, children, detail, className, detailClassName }) {
+  return /* @__PURE__ */ jsxs17(Fragment4, { children: [
+    /* @__PURE__ */ jsxs17(TableRow, { className: cn("cursor-pointer", className), "aria-expanded": expanded, onClick: onToggle, children: [
+      /* @__PURE__ */ jsx28(TableCell, { className: "w-6 pr-0", children: /* @__PURE__ */ jsx28(
+        ChevronRight2,
+        {
+          className: cn(
+            "size-3.5 text-muted-foreground transition-transform",
+            expanded && "rotate-90 text-foreground"
+          )
+        }
+      ) }),
+      children
+    ] }),
+    expanded && /* @__PURE__ */ jsx28(TableRow, { className: cn("bg-muted/30 hover:bg-muted/30", detailClassName), children: /* @__PURE__ */ jsx28(TableCell, { colSpan, children: detail }) })
+  ] });
 }
 
 // src/components/tabs.tsx
@@ -1949,6 +1997,7 @@ export {
   DropdownMenuTrigger,
   DropdownSelect,
   EmptyState,
+  ExpandableRow,
   IconButton,
   InfoPopover,
   Input,
@@ -1999,6 +2048,7 @@ export {
   SidebarSeparator,
   SidebarTrigger,
   Skeleton,
+  SortableTableHead,
   StandardButton,
   StatCard,
   Switch,

@@ -8,6 +8,7 @@ export * from './components/collapsible';
 export * from './components/dialog';
 export * from './components/dropdown-menu';
 export * from './components/empty-state';
+export * from './components/info-popover';
 export * from './components/input';
 export * from './components/label';
 export * from './components/log-board';

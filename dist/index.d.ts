@@ -2,8 +2,8 @@ import { ClassValue } from 'clsx';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import { VariantProps } from 'class-variance-authority';
 import * as React$1 from 'react';
-import { ReactNode } from 'react';
-import { Checkbox as Checkbox$1, Collapsible as Collapsible$1, Dialog as Dialog$1, DropdownMenu as DropdownMenu$1, Label as Label$1, Popover as Popover$1, Separator as Separator$1, Tooltip as Tooltip$1, Switch as Switch$1, Tabs as Tabs$1 } from 'radix-ui';
+import { ReactNode, ComponentProps } from 'react';
+import { Checkbox as Checkbox$1, Collapsible as Collapsible$1, Dialog as Dialog$1, DropdownMenu as DropdownMenu$1, Popover as Popover$1, Label as Label$1, Separator as Separator$1, Tooltip as Tooltip$1, Switch as Switch$1, Tabs as Tabs$1 } from 'radix-ui';
 
 /** Merge Tailwind CSS classes with clsx, resolving conflicts via tailwind-merge. */
 declare function cn(...inputs: ClassValue[]): string;
@@ -146,6 +146,29 @@ interface EmptyStateProps {
 }
 declare function EmptyState({ children, className }: EmptyStateProps): React$1.JSX.Element;
 
+declare function Popover({ ...props }: React$1.ComponentProps<typeof Popover$1.Root>): React$1.JSX.Element;
+declare function PopoverTrigger({ ...props }: React$1.ComponentProps<typeof Popover$1.Trigger>): React$1.JSX.Element;
+declare function PopoverAnchor({ ...props }: React$1.ComponentProps<typeof Popover$1.Anchor>): React$1.JSX.Element;
+declare function PopoverContent({ className, align, sideOffset, ...props }: React$1.ComponentProps<typeof Popover$1.Content>): React$1.JSX.Element;
+declare function PopoverClose({ ...props }: React$1.ComponentProps<typeof Popover$1.Close>): React$1.JSX.Element;
+
+interface InfoPopoverProps {
+    /** Read-only content rendered inside the popover panel. */
+    children: ReactNode;
+    /** Tooltip + accessible label on the trigger button. */
+    label?: string;
+    /** Panel alignment against the trigger (forwarded to PopoverContent). */
+    align?: ComponentProps<typeof PopoverContent>['align'];
+    /** Extra classes for the panel; defaults to a fixed-width column. */
+    className?: string;
+}
+/**
+ * Ghost info icon button that reveals read-only details in a popover.
+ * For surfacing metadata next to an action without spending toolbar space —
+ * pass the panel body as children (e.g. a stack of MetadataRow).
+ */
+declare function InfoPopover({ children, label, align, className }: InfoPopoverProps): React$1.JSX.Element;
+
 declare function Input({ className, type, ...props }: React$1.ComponentProps<'input'>): React$1.JSX.Element;
 
 declare function Label({ className, ...props }: React$1.ComponentProps<typeof Label$1.Root>): React$1.JSX.Element;
@@ -249,12 +272,6 @@ interface PanelProps {
     className?: string;
 }
 declare function Panel({ children, className }: PanelProps): React$1.JSX.Element;
-
-declare function Popover({ ...props }: React$1.ComponentProps<typeof Popover$1.Root>): React$1.JSX.Element;
-declare function PopoverTrigger({ ...props }: React$1.ComponentProps<typeof Popover$1.Trigger>): React$1.JSX.Element;
-declare function PopoverAnchor({ ...props }: React$1.ComponentProps<typeof Popover$1.Anchor>): React$1.JSX.Element;
-declare function PopoverContent({ className, align, sideOffset, ...props }: React$1.ComponentProps<typeof Popover$1.Content>): React$1.JSX.Element;
-declare function PopoverClose({ ...props }: React$1.ComponentProps<typeof Popover$1.Close>): React$1.JSX.Element;
 
 interface DropdownSelectOption<T extends string = string> {
     value: T;
@@ -410,4 +427,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, IconButton, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, StandardButton, StatCard, Switch, TabNav, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, StandardButton, StatCard, Switch, TabNav, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };

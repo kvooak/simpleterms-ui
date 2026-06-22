@@ -16,7 +16,11 @@ const ALIGN_CLASS: Record<CellAlign, string> = {
  * Flat, borderless-frame data table. Wraps the `<table>` in a horizontal-scroll
  * container so it never overflows its panel. Compose with the cell parts below.
  */
-function Table({ className, wrapperClassName, ...props }: React.ComponentProps<'table'> & { wrapperClassName?: string }) {
+function Table({
+  className,
+  wrapperClassName,
+  ...props
+}: React.ComponentProps<'table'> & { wrapperClassName?: string }) {
   return (
     <div data-slot="table-wrapper" className={cn('w-full overflow-x-auto', wrapperClassName)}>
       <table data-slot="table" className={cn('w-full border-collapse text-sm', className)} {...props} />
@@ -25,7 +29,9 @@ function Table({ className, wrapperClassName, ...props }: React.ComponentProps<'
 }
 
 function TableHeader({ className, ...props }: React.ComponentProps<'thead'>) {
-  return <thead data-slot="table-header" className={cn('[&_tr]:border-b [&_tr]:border-border', className)} {...props} />;
+  return (
+    <thead data-slot="table-header" className={cn('[&_tr]:border-b [&_tr]:border-border', className)} {...props} />
+  );
 }
 
 function TableBody({ className, ...props }: React.ComponentProps<'tbody'>) {
@@ -75,7 +81,9 @@ function TableCell({
   align = 'left',
   ...props
 }: Omit<React.ComponentProps<'td'>, 'align'> & { align?: CellAlign }) {
-  return <td data-slot="table-cell" className={cn('px-3 py-2 align-top', ALIGN_CLASS[align], className)} {...props} />;
+  return (
+    <td data-slot="table-cell" className={cn('px-3 py-2 align-top', ALIGN_CLASS[align], className)} {...props} />
+  );
 }
 
 interface SortableTableHeadProps<K extends string> {
@@ -121,7 +129,11 @@ function SortableTableHead<K extends string>({
       >
         {label}
         {isActive ? (
-          direction === 'asc' ? <ArrowUp className="size-3" /> : <ArrowDown className="size-3" />
+          direction === 'asc' ? (
+            <ArrowUp className="size-3" />
+          ) : (
+            <ArrowDown className="size-3" />
+          )
         ) : (
           <ChevronsUpDown className="size-3 opacity-40" />
         )}
@@ -148,7 +160,15 @@ interface ExpandableRowProps {
  * full-width detail row revealed when `expanded`. Expansion state is owned by
  * the caller (controlled), so several rows can stay open at once.
  */
-function ExpandableRow({ expanded, onToggle, colSpan, children, detail, className, detailClassName }: ExpandableRowProps) {
+function ExpandableRow({
+  expanded,
+  onToggle,
+  colSpan,
+  children,
+  detail,
+  className,
+  detailClassName,
+}: ExpandableRowProps) {
   return (
     <>
       <TableRow className={cn('cursor-pointer', className)} aria-expanded={expanded} onClick={onToggle}>

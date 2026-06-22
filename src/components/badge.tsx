@@ -13,16 +13,19 @@ const badgeVariants = cva(
         destructive:
           'bg-destructive text-white focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
         outline: 'border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground',
-        success: 'bg-green-700 text-white dark:bg-green-600',
-        warning: 'bg-amber-600 text-white dark:bg-amber-500',
-        info: 'bg-blue-600 text-white dark:bg-blue-500',
-        'error-soft': 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400',
-        'warning-soft': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
-        'caution-soft': 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
-        'retry-soft': 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
-        'info-soft': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-        'success-soft': 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
-        'purple-soft': 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
+        // Solid variants use fixed faded-Gruvbox fills + cream text — emphatic
+        // and legible on either canvas. Soft variants use the flipping --gb-*
+        // tint tokens (see index.css) so a single class works in both themes.
+        success: 'bg-[#79740e] text-[#fbf1c7]',
+        warning: 'bg-[#b57614] text-[#fbf1c7]',
+        info: 'bg-[#076678] text-[#fbf1c7]',
+        'error-soft': 'bg-gb-red/15 text-gb-red',
+        'warning-soft': 'bg-gb-yellow/15 text-gb-yellow',
+        'caution-soft': 'bg-gb-orange/15 text-gb-orange',
+        'retry-soft': 'bg-gb-yellow/15 text-gb-yellow',
+        'info-soft': 'bg-gb-blue/15 text-gb-blue',
+        'success-soft': 'bg-gb-green/15 text-gb-green',
+        'purple-soft': 'bg-gb-purple/15 text-gb-purple',
       },
       size: {
         default: 'text-base px-2 py-0.5',

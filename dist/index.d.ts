@@ -7,6 +7,10 @@ import { Checkbox as Checkbox$1, Collapsible as Collapsible$1, Dialog as Dialog$
 
 /** Merge Tailwind CSS classes with clsx, resolving conflicts via tailwind-merge. */
 declare function cn(...inputs: ClassValue[]): string;
+/** Extract a human-readable message from an unknown thrown value, with a fallback. */
+declare function getErrorMessage(err: unknown, fallback: string): string;
+/** Convert a workspace name to a URL-safe slug. */
+declare function toSlug(name: string): string;
 
 declare function useIsMobile(): boolean;
 
@@ -146,6 +150,27 @@ interface EmptyStateProps {
 }
 declare function EmptyState({ children, className }: EmptyStateProps): React$1.JSX.Element;
 
+interface FieldProps {
+    /** Visible label text. */
+    label: React$1.ReactNode;
+    /** id of the control this field wraps — wires label↔control for screen readers. */
+    htmlFor?: string;
+    /** Helper text rendered under the control. */
+    hint?: React$1.ReactNode;
+    /** Error text rendered under the control; takes precedence over `hint`. */
+    error?: React$1.ReactNode;
+    className?: string;
+    labelClassName?: string;
+    /** The control (Input, Textarea, DropdownSelect, …). */
+    children: React$1.ReactNode;
+}
+/**
+ * A vertical labelled form field: label on top, control below, optional
+ * hint/error underneath. Centralises the label↔control association so every
+ * field is wired for assistive tech via a single `htmlFor`.
+ */
+declare function Field({ label, htmlFor, hint, error, className, labelClassName, children }: FieldProps): React$1.JSX.Element;
+
 declare function Popover({ ...props }: React$1.ComponentProps<typeof Popover$1.Root>): React$1.JSX.Element;
 declare function PopoverTrigger({ ...props }: React$1.ComponentProps<typeof Popover$1.Trigger>): React$1.JSX.Element;
 declare function PopoverAnchor({ ...props }: React$1.ComponentProps<typeof Popover$1.Anchor>): React$1.JSX.Element;
@@ -227,15 +252,63 @@ interface MetadataRowProps {
 }
 declare function MetadataRow({ label, children, noBorder }: MetadataRowProps): React$1.JSX.Element;
 
+/**
+ * Compact "Overview" button that opens a popover of summary stats — the
+ * streamlined alternative to a heavy grid of StatCards. Lifted out of the MCP
+ * Logs page so every page presents its aggregates the same way: a single
+ * unobtrusive trigger that keeps the numbers one click away instead of eating
+ * a row of cards above the real content.
+ *
+ * Compose the body from OverviewSection + OverviewStatRow (plus any extra
+ * content — a chart, a legend — as additional children).
+ */
+interface OverviewStatRowProps {
+    label: string;
+    value: React.ReactNode;
+    /** Optional leading icon. */
+    icon?: React.ComponentType<{
+        className?: string;
+    }>;
+    /** Color class applied to the icon (e.g. a semantic accent). */
+    accent?: string;
+}
+/** One label → value row inside an OverviewSection. */
+declare function OverviewStatRow({ label, value, icon: Icon, accent }: OverviewStatRowProps): React.JSX.Element;
+/** A titled group of rows. Sections stack with dividers inside the popover. */
+declare function OverviewSection({ title, children, }: {
+    title?: string;
+    children: React.ReactNode;
+}): React.JSX.Element;
+interface OverviewPopoverProps {
+    /** Trigger button text. Defaults to "Overview". */
+    label?: string;
+    /** Optional trailing value shown muted in the trigger (e.g. a headline total). */
+    badge?: React.ReactNode;
+    /** Trigger icon. Defaults to Activity. */
+    icon?: React.ComponentType<{
+        className?: string;
+    }>;
+    align?: 'start' | 'center' | 'end';
+    /** Override the popover width (default w-72). */
+    contentClassName?: string;
+    disabled?: boolean;
+    children: React.ReactNode;
+}
+declare function OverviewPopover({ label, badge, icon: Icon, align, contentClassName, disabled, children, }: OverviewPopoverProps): React.JSX.Element;
+
 interface PageHeaderProps {
     icon?: React.ComponentType<{
         className?: string;
     }>;
     title: string;
     subtitle?: React.ReactNode;
+    /** Inline navigation tabs rendered in the header band, after the title. */
+    tabs?: React.ReactNode;
+    /** Controls pushed to the far (right) end of the band — e.g. a search field or action button. */
+    actions?: React.ReactNode;
     children?: React.ReactNode;
 }
-declare function PageHeader({ icon: Icon, title, subtitle, children }: PageHeaderProps): React$1.JSX.Element;
+declare function PageHeader({ icon: Icon, title, subtitle, tabs, actions, children }: PageHeaderProps): React$1.JSX.Element;
 
 interface PageLayoutProps {
     icon?: React.ComponentType<{
@@ -473,7 +546,7 @@ interface ExpandableRowProps {
  * full-width detail row revealed when `expanded`. Expansion state is owned by
  * the caller (controlled), so several rows can stay open at once.
  */
-declare function ExpandableRow({ expanded, onToggle, colSpan, children, detail, className, detailClassName }: ExpandableRowProps): React$1.JSX.Element;
+declare function ExpandableRow({ expanded, onToggle, colSpan, children, detail, className, detailClassName, }: ExpandableRowProps): React$1.JSX.Element;
 
 declare function Tabs({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.Root>): React$1.JSX.Element;
 declare function TabsList({ className, ...props }: React$1.ComponentProps<typeof Tabs$1.List>): React$1.JSX.Element;
@@ -482,4 +555,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, getErrorMessage, toSlug, useIsMobile, useSidebar, useSidebarActions };

@@ -17,9 +17,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -49,6 +46,18 @@
   --color-signal-success: var(--signal-success);
   --color-signal-warning: var(--signal-warning);
   --color-signal-error: var(--signal-error);
+  --color-gb-red: var(--gb-red);
+  --color-gb-green: var(--gb-green);
+  --color-gb-yellow: var(--gb-yellow);
+  --color-gb-blue: var(--gb-blue);
+  --color-gb-purple: var(--gb-purple);
+  --color-gb-aqua: var(--gb-aqua);
+  --color-gb-orange: var(--gb-orange);
+  --color-gb-gray: var(--gb-gray);
+  --font-sans: 'IBM Plex Sans Variable', sans-serif;
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -57,88 +66,117 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --font-sans: 'IBM Plex Sans Variable', sans-serif;
 }
 
+/* Light mode — warm off-white (a deliberate departure from authentic Gruvbox
+   light, whose cream canvas read as too yellow). Low-saturation warm-neutral
+   ramp: near-white canvas (#faf8f0), warm-linen cards (#f4f1e6), warm-gray
+   borders. Keeps a cozy warmth without the yellow cast. Accents (aqua primary,
+   charts, gb-* hues) stay the shared Gruvbox values for brand consistency. */
 :root {
   --radius: 0rem;
-  --background: oklch(0.95 0.006 80);
-  --foreground: oklch(0.21 0.005 80);
-  --card: oklch(0.94 0.006 80);
-  --card-foreground: oklch(0.21 0.005 80);
-  --popover: oklch(0.915 0.008 80);
-  --popover-foreground: oklch(0.21 0.005 80);
-  --primary: oklch(0.49 0.15 250);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.89 0.008 80);
-  --secondary-foreground: oklch(0.21 0.005 80);
-  --muted: oklch(0.89 0.008 80);
-  --muted-foreground: oklch(0.55 0.005 80);
-  --accent: oklch(0.865 0.01 80);
-  --accent-foreground: oklch(0.21 0.005 80);
-  --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.78 0.005 80);
-  --input: oklch(0.72 0.005 80);
-  --ring: oklch(0.49 0.15 250);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --surface-command-bar: oklch(0.935 0.006 80);
-  --surface-column: oklch(0.93 0.006 80);
-  --surface-dialog-header: oklch(0.88 0.008 80);
-  --sidebar: oklch(0.93 0.006 80);
-  --sidebar-foreground: oklch(0.21 0.005 80);
-  --sidebar-primary: oklch(0.49 0.15 250);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.865 0.01 80);
-  --sidebar-accent-foreground: oklch(0.21 0.005 80);
-  --sidebar-border: oklch(0.78 0.005 80);
-  --sidebar-ring: oklch(0.49 0.15 250);
-  --signal-success: oklch(0.55 0.15 150);
-  --signal-warning: oklch(0.72 0.14 70);
-  --signal-error: oklch(0.55 0.2 25);
+  --background: #faf8f0; /* warm white  */
+  --foreground: #3c3836; /* fg1         */
+  --card: #f4f1e6; /* warm linen  */
+  --card-foreground: #3c3836;
+  --popover: #f4f1e6;
+  --popover-foreground: #3c3836;
+  --primary: #83a598; /* bright-blue accent */
+  --primary-foreground: #282828;
+  --secondary: #ece8db; /* warm gray-1 */
+  --secondary-foreground: #3c3836;
+  --muted: #ece8db;
+  --muted-foreground: #7c6f64; /* fg4   */
+  --accent: #ece8db;
+  --accent-foreground: #3c3836;
+  --destructive: #cc241d; /* neutral red */
+  --border: #ddd7c8; /* warm gray-2 */
+  --input: #cfc8b6; /* warm gray-3 */
+  --ring: #83a598;
+  --chart-1: #458588; /* blue   */
+  --chart-2: #98971a; /* green  */
+  --chart-3: #d79921; /* yellow */
+  --chart-4: #d65d0e; /* orange */
+  --chart-5: #b16286; /* purple */
+  --surface-command-bar: #f0ecdf; /* warm white-2 */
+  --surface-column: #f0ecdf;
+  --surface-dialog-header: #ece8db;
+  --sidebar: #ece8db; /* warm gray-1 */
+  --sidebar-foreground: #3c3836;
+  --sidebar-primary: #83a598;
+  --sidebar-primary-foreground: #282828;
+  --sidebar-accent: #ddd7c8; /* warm gray-2 */
+  --sidebar-accent-foreground: #3c3836;
+  --sidebar-border: #ddd7c8;
+  --sidebar-ring: #83a598;
+  --signal-success: #79740e; /* faded green  */
+  --signal-warning: #b57614; /* faded yellow */
+  --signal-error: #cc241d; /* neutral red  */
+
+  /* Gruvbox accent palette — faded variants tuned for the cream canvas.
+     These flip to the bright variants in .dark so hue-matched text, dots,
+     and tinted chips stay legible on either background. */
+  --gb-red: #9d0006;
+  --gb-green: #79740e;
+  --gb-yellow: #b57614;
+  --gb-blue: #076678;
+  --gb-purple: #8f3f71;
+  --gb-aqua: #427b58;
+  --gb-orange: #af3a03;
+  --gb-gray: #7c6f64;
 }
 
+/* Dark mode — authentic Gruvbox dark (medium). Charcoal canvas (bg0 #282828),
+   cream foreground (fg1 #ebdbb2), layered browns, aqua #83a598 bright-blue
+   primary accent (shared with light, matches the Hyprland desktop theme). */
 .dark {
-  --background: oklch(0.16 0.006 260);
-  --foreground: oklch(0.88 0.006 260);
-  --card: oklch(0.2 0.008 260);
-  --card-foreground: oklch(0.88 0.006 260);
-  --popover: oklch(0.2 0.008 260);
-  --popover-foreground: oklch(0.88 0.006 260);
-  --primary: oklch(0.6 0.15 250);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.24 0.008 260);
-  --secondary-foreground: oklch(0.85 0.006 260);
-  --muted: oklch(0.24 0.008 260);
-  --muted-foreground: oklch(0.58 0.008 260);
-  --accent: oklch(0.26 0.01 260);
-  --accent-foreground: oklch(0.88 0.006 260);
-  --destructive: oklch(0.65 0.2 25);
-  --border: oklch(0.3 0.01 260);
-  --input: oklch(0.32 0.012 260);
-  --ring: oklch(0.6 0.15 250);
-  --chart-1: oklch(0.72 0.12 250);
-  --chart-2: oklch(0.62 0.18 255);
-  --chart-3: oklch(0.55 0.2 258);
-  --chart-4: oklch(0.5 0.2 260);
-  --chart-5: oklch(0.45 0.17 262);
-  --surface-command-bar: oklch(0.19 0.006 260);
-  --surface-column: oklch(0.18 0.006 260);
-  --surface-dialog-header: oklch(0.22 0.006 260);
-  --sidebar: oklch(0.14 0.006 260);
-  --sidebar-foreground: oklch(0.88 0.006 260);
-  --sidebar-primary: oklch(0.6 0.15 250);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.26 0.01 260);
-  --sidebar-accent-foreground: oklch(0.88 0.006 260);
-  --sidebar-border: oklch(0.28 0.01 260);
-  --sidebar-ring: oklch(0.6 0.15 250);
-  --signal-success: oklch(0.6 0.14 150);
-  --signal-warning: oklch(0.74 0.14 70);
-  --signal-error: oklch(0.6 0.18 25);
+  --background: #282828; /* bg0   */
+  --foreground: #ebdbb2; /* fg1   */
+  --card: #3c3836; /* bg1   */
+  --card-foreground: #ebdbb2;
+  --popover: #3c3836;
+  --popover-foreground: #ebdbb2;
+  --primary: #83a598; /* bright-blue accent */
+  --primary-foreground: #282828;
+  --secondary: #504945; /* bg2   */
+  --secondary-foreground: #ebdbb2;
+  --muted: #3c3836;
+  --muted-foreground: #a89984; /* fg4 / gray */
+  --accent: #504945;
+  --accent-foreground: #fbf1c7; /* fg0   */
+  --destructive: #fb4934; /* bright red */
+  --border: #504945; /* bg2   */
+  --input: #665c54; /* bg3   */
+  --ring: #83a598;
+  --chart-1: #83a598; /* blue   */
+  --chart-2: #b8bb26; /* green  */
+  --chart-3: #fabd2f; /* yellow */
+  --chart-4: #fe8019; /* orange */
+  --chart-5: #d3869b; /* purple */
+  --surface-command-bar: #32302f; /* bg0_s */
+  --surface-column: #1d2021; /* bg0_h */
+  --surface-dialog-header: #3c3836;
+  --sidebar: #1d2021; /* bg0_h */
+  --sidebar-foreground: #ebdbb2;
+  --sidebar-primary: #83a598;
+  --sidebar-primary-foreground: #1d2021;
+  --sidebar-accent: #3c3836; /* bg1   */
+  --sidebar-accent-foreground: #ebdbb2;
+  --sidebar-border: #3c3836;
+  --sidebar-ring: #83a598;
+  --signal-success: #b8bb26; /* bright green  */
+  --signal-warning: #fabd2f; /* bright yellow */
+  --signal-error: #fb4934; /* bright red    */
+
+  /* Gruvbox accent palette — bright variants for the charcoal canvas. */
+  --gb-red: #fb4934;
+  --gb-green: #b8bb26;
+  --gb-yellow: #fabd2f;
+  --gb-blue: #83a598;
+  --gb-purple: #d3869b;
+  --gb-aqua: #8ec07c;
+  --gb-orange: #fe8019;
+  --gb-gray: #a89984;
 }
 
 /* Sonner toast overrides — match brutalist theme */
@@ -156,10 +194,10 @@
 
 /* Sidebar gradient — subtle top-to-bottom lightness shift */
 [data-sidebar='sidebar'] > nav[data-slot='sidebar-inner'] {
-  background: linear-gradient(to bottom, oklch(0.94 0.006 80) 0%, oklch(0.92 0.006 80) 100%);
+  background: linear-gradient(to bottom, #ece8db 0%, #e1dac9 100%);
 }
 .dark [data-sidebar='sidebar'] > nav[data-slot='sidebar-inner'] {
-  background: linear-gradient(to bottom, oklch(0.16 0.006 260) 0%, oklch(0.12 0.006 260) 100%);
+  background: linear-gradient(to bottom, #1d2021 0%, #161819 100%);
 }
 
 @layer base {

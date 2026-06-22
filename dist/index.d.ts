@@ -346,6 +346,25 @@ interface PanelProps {
 }
 declare function Panel({ children, className }: PanelProps): React$1.JSX.Element;
 
+interface SearchInputProps {
+    value: string;
+    onChange: (value: string) => void;
+    /** Fires on every keystroke even when debouncing. Use for UI that needs instant feedback (e.g. popover visibility). */
+    onChangeImmediate?: (value: string) => void;
+    onSubmit?: () => void;
+    placeholder?: string;
+    className?: string;
+    /** When set, debounces the onChange callback by this many ms. Input stays responsive. */
+    debounceMs?: number;
+}
+/**
+ * Standard search box: search icon, clearable input, optional debounce. The
+ * canonical filter/search control across toolbars and list views.
+ */
+declare function SearchInput({ ref, value, onChange, onChangeImmediate, onSubmit, placeholder, className, debounceMs, }: SearchInputProps & {
+    ref?: React$1.Ref<HTMLInputElement>;
+}): React$1.JSX.Element;
+
 interface DropdownSelectOption<T extends string = string> {
     value: T;
     label: string | React$1.ReactNode;
@@ -555,4 +574,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, getErrorMessage, toSlug, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, SearchInput, type SearchInputProps, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, getErrorMessage, toSlug, useIsMobile, useSidebar, useSidebarActions };

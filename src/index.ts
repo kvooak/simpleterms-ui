@@ -20,6 +20,7 @@ export * from './components/page-layout';
 export * from './components/pagination';
 export * from './components/panel';
 export * from './components/popover';
+export * from './components/search-input';
 export * from './components/select';
 export * from './components/separator';
 export * from './components/sheet';

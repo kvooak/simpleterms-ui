@@ -1,6 +1,6 @@
 {
   "name": "simpleterms-ui",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Brutalist Win2000/IBM flat UI kit \u2014 React 19 + Tailwind v4 + Radix, extracted from simple-terms",
   "type": "module",
   "license": "MIT",

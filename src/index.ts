@@ -3,6 +3,7 @@ export * from './hooks/use-mobile';
 export * from './components/badge';
 export * from './components/button';
 export * from './components/checkbox';
+export * from './components/checkbox-field';
 export * from './components/chip-input';
 export * from './components/collapsible';
 export * from './components/dialog';

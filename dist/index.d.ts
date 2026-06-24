@@ -75,6 +75,30 @@ declare function LinkButton({ ref, className, type, ...props }: React$1.Componen
 
 declare function Checkbox({ className, checked, ...props }: React$1.ComponentProps<typeof Checkbox$1.Root>): React$1.JSX.Element;
 
+type CheckboxFieldVariant = 'row' | 'card';
+interface CheckboxFieldProps extends Omit<React$1.ComponentProps<typeof Checkbox>, 'className'> {
+    /** Primary label text; also the checkbox's accessible name. */
+    label: React$1.ReactNode;
+    /** Optional secondary line under the label. Reads best with `variant="card"`. */
+    description?: React$1.ReactNode;
+    /** 'row' (default) is an inline single line; 'card' is a bordered tile with title + description. */
+    variant?: CheckboxFieldVariant;
+    /** Class applied to the clickable wrapper (the whole row). */
+    className?: string;
+    /** Class applied to the checkbox itself. */
+    checkboxClassName?: string;
+}
+/**
+ * A checkbox paired with its label as a single accessible, clickable target.
+ *
+ * The whole row is a `<label>` wrapping the checkbox, so clicking anywhere on it
+ * toggles the box (native label-to-control forwarding, no `htmlFor` plumbing) and
+ * the label text becomes the checkbox's accessible name. The row carries the
+ * pointer cursor, a `transition-colors` hover state, and (for cards) a checked
+ * accent so it visibly reads as interactive.
+ */
+declare function CheckboxField({ label, description, variant, className, checkboxClassName, ...checkboxProps }: CheckboxFieldProps): React$1.JSX.Element;
+
 interface ChipInputProps {
     /** Current list of values, rendered as removable chips. */
     values: string[];
@@ -574,4 +598,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, SearchInput, type SearchInputProps, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, getErrorMessage, toSlug, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, CheckboxField, type CheckboxFieldProps, type CheckboxFieldVariant, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, SearchInput, type SearchInputProps, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, getErrorMessage, toSlug, useIsMobile, useSidebar, useSidebarActions };

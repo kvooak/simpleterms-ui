@@ -45,11 +45,15 @@ function CheckboxField({
         'has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-60',
         isCard
           ? cn(
-              'items-start border border-border bg-muted/20 p-3',
+              'min-h-11 items-start border border-border bg-muted/20 p-3',
               'hover:bg-muted/40 hover:border-foreground/25',
+              'has-[:focus-visible]:border-foreground/25 has-[:focus-visible]:bg-muted/40',
               'has-[[data-checked]]:border-primary/70 has-[[data-checked]]:bg-primary/5'
             )
-          : 'items-center -mx-2 px-2 py-1.5 hover:bg-muted/50',
+          : cn(
+              'min-h-9 items-center -mx-2 px-2 py-1.5',
+              'hover:bg-muted/50 has-[:focus-visible]:bg-muted/50'
+            ),
         className
       )}
     >

@@ -46,13 +46,15 @@ function CheckboxField({
         isCard
           ? cn(
               'min-h-11 items-start border border-border bg-muted/20 p-3',
-              'hover:bg-muted/40 hover:border-foreground/25',
+              'hover:bg-muted/40 hover:border-foreground/25 dark:hover:bg-accent',
               'has-[:focus-visible]:border-foreground/25 has-[:focus-visible]:bg-muted/40',
+              'dark:has-[:focus-visible]:bg-accent',
               'has-[[data-checked]]:border-primary/70 has-[[data-checked]]:bg-primary/5'
             )
           : cn(
               'min-h-9 items-center -mx-2 px-2 py-1.5',
-              'hover:bg-muted/50 has-[:focus-visible]:bg-muted/50'
+              'hover:bg-muted/50 has-[:focus-visible]:bg-muted/50',
+              'dark:hover:bg-accent dark:has-[:focus-visible]:bg-accent'
             ),
         className
       )}

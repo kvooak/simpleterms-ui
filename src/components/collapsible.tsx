@@ -46,7 +46,7 @@ function CollapsibleSection({
           tabIndex={0}
           className={cn(
             'flex items-center gap-1.5 w-full text-left',
-            'cursor-pointer hover:bg-muted/50 transition-colors',
+            'cursor-pointer hover:bg-muted/50 dark:hover:bg-accent transition-colors',
             'px-3 py-2',
             triggerClassName
           )}

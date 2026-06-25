@@ -149,11 +149,11 @@ const rowButtonVariants = cva(
       },
       variant: {
         /** Plain list row: subtle hover background. */
-        row: 'hover:bg-muted/40',
+        row: 'hover:bg-muted/40 dark:hover:bg-accent',
         /** Dropdown / combobox option. */
         option: 'text-sm hover:bg-accent',
         /** Bordered settings tile / card. Carries its own p-3; size is moot. */
-        tile: 'border border-border bg-muted/20 p-3 hover:bg-muted/40',
+        tile: 'border border-border bg-muted/20 p-3 hover:bg-muted/40 dark:hover:bg-accent',
         /** No hover chrome — for rows whose hover styling is group-driven. */
         bare: '',
       },

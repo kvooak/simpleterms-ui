@@ -236,7 +236,7 @@ function Checkbox({ className, checked, ...props }) {
         {
           "data-slot": "checkbox-indicator",
           className: "[&>svg]:size-4 grid place-content-center text-current transition-none",
-          children: checked === "indeterminate" ? /* @__PURE__ */ jsx3(MinusIcon, {}) : /* @__PURE__ */ jsx3(CheckIcon, {})
+          children: checked === "indeterminate" ? /* @__PURE__ */ jsx3(MinusIcon, { strokeWidth: 3 }) : /* @__PURE__ */ jsx3(CheckIcon, { strokeWidth: 3 })
         }
       )
     }

@@ -18,7 +18,7 @@ function Checkbox({ className, checked, ...props }: React.ComponentProps<typeof 
         data-slot="checkbox-indicator"
         className="[&>svg]:size-4 grid place-content-center text-current transition-none"
       >
-        {checked === 'indeterminate' ? <MinusIcon /> : <CheckIcon />}
+        {checked === 'indeterminate' ? <MinusIcon strokeWidth={3} /> : <CheckIcon strokeWidth={3} />}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );

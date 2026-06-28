@@ -993,6 +993,7 @@ function SearchInput({
 // src/components/select.tsx
 import { ChevronDownIcon, CheckIcon as CheckIcon2, ChevronUpIcon } from "lucide-react";
 import { Select as SelectPrimitive } from "radix-ui";
+import * as React3 from "react";
 import { jsx as jsx23, jsxs as jsxs15 } from "react/jsx-runtime";
 function Select({ ...props }) {
   return /* @__PURE__ */ jsx23(SelectPrimitive.Root, { "data-slot": "select", ...props });
@@ -1105,6 +1106,29 @@ function SelectScrollDownButton({
     }
   );
 }
+function SelectLabel({ className, ...props }) {
+  return /* @__PURE__ */ jsx23(
+    SelectPrimitive.Label,
+    {
+      "data-slot": "select-label",
+      className: cn(
+        "text-muted-foreground flex items-center gap-1.5 px-2 pt-1.5 pb-1 text-sm font-medium [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SelectSeparator({ className, ...props }) {
+  return /* @__PURE__ */ jsx23(
+    SelectPrimitive.Separator,
+    {
+      "data-slot": "select-separator",
+      className: cn("bg-border pointer-events-none my-1 h-px", className),
+      ...props
+    }
+  );
+}
 var EMPTY_SENTINEL = "__empty__";
 function isGroup(item) {
   return "options" in item;
@@ -1117,7 +1141,11 @@ function toExternalValue(v) {
 }
 function renderOption(option) {
   const itemValue = toInternalValue(option.value);
-  return /* @__PURE__ */ jsx23(SelectItem, { value: itemValue, className: option.className, children: option.label }, itemValue);
+  const Icon = option.icon;
+  return /* @__PURE__ */ jsxs15(SelectItem, { value: itemValue, className: option.className, children: [
+    Icon !== void 0 && /* @__PURE__ */ jsx23(Icon, { className: "text-muted-foreground size-4 shrink-0", "aria-hidden": true }),
+    option.label
+  ] }, itemValue);
 }
 function DropdownSelect({
   value,
@@ -1141,7 +1169,17 @@ function DropdownSelect({
     /* @__PURE__ */ jsx23(SelectTrigger, { showChevron, className, style, "aria-label": ariaLabel, children: /* @__PURE__ */ jsx23(SelectValue, { placeholder }) }),
     /* @__PURE__ */ jsx23(SelectContent, { className: contentClassName, children: options.map((item, index) => {
       if (isGroup(item)) {
-        return /* @__PURE__ */ jsx23(SelectGroup, { children: item.options.map(renderOption) }, item.label !== "" ? item.label : String(index));
+        const GroupIcon = item.icon;
+        return /* @__PURE__ */ jsxs15(React3.Fragment, { children: [
+          index > 0 && /* @__PURE__ */ jsx23(SelectSeparator, {}),
+          /* @__PURE__ */ jsxs15(SelectGroup, { children: [
+            item.label !== "" && /* @__PURE__ */ jsxs15(SelectLabel, { children: [
+              GroupIcon !== void 0 && /* @__PURE__ */ jsx23(GroupIcon, { "aria-hidden": true }),
+              item.label
+            ] }),
+            item.options.map(renderOption)
+          ] })
+        ] }, item.label !== "" ? item.label : String(index));
       }
       return renderOption(item);
     }) })
@@ -1262,7 +1300,7 @@ function SheetDescription({ className, ...props }) {
 import { cva as cva3 } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 import { Slot as Slot3 } from "radix-ui";
-import * as React3 from "react";
+import * as React4 from "react";
 
 // src/components/skeleton.tsx
 import { jsx as jsx26 } from "react/jsx-runtime";
@@ -1314,22 +1352,22 @@ var SIDEBAR_WIDTH = "16rem";
 var SIDEBAR_WIDTH_MOBILE = "18rem";
 var SIDEBAR_WIDTH_ICON = "3rem";
 var SIDEBAR_KEYBOARD_SHORTCUT = "b";
-var SidebarStateContext = React3.createContext(null);
-var SidebarActionsContext = React3.createContext(null);
+var SidebarStateContext = React4.createContext(null);
+var SidebarActionsContext = React4.createContext(null);
 function useSidebarActions() {
-  const context = React3.useContext(SidebarActionsContext);
+  const context = React4.useContext(SidebarActionsContext);
   if (context === null) {
     throw new Error("useSidebarActions must be used within a SidebarProvider.");
   }
   return context;
 }
 function useSidebar() {
-  const state = React3.useContext(SidebarStateContext);
-  const actions = React3.useContext(SidebarActionsContext);
+  const state = React4.useContext(SidebarStateContext);
+  const actions = React4.useContext(SidebarActionsContext);
   if (state === null || actions === null) {
     throw new Error("useSidebar must be used within a SidebarProvider.");
   }
-  return React3.useMemo(() => ({ ...state, ...actions }), [state, actions]);
+  return React4.useMemo(() => ({ ...state, ...actions }), [state, actions]);
 }
 function SidebarProvider({
   defaultOpen = true,
@@ -1341,10 +1379,10 @@ function SidebarProvider({
   ...props
 }) {
   const isMobile = useIsMobile();
-  const [openMobile, setOpenMobile] = React3.useState(false);
-  const [_open, _setOpen] = React3.useState(defaultOpen);
+  const [openMobile, setOpenMobile] = React4.useState(false);
+  const [_open, _setOpen] = React4.useState(defaultOpen);
   const open = openProp ?? _open;
-  const setOpen = React3.useCallback(
+  const setOpen = React4.useCallback(
     (value) => {
       const openState = typeof value === "function" ? value(open) : value;
       if (setOpenProp !== void 0) {
@@ -1356,14 +1394,14 @@ function SidebarProvider({
     },
     [setOpenProp, open]
   );
-  const toggleSidebar = React3.useCallback(() => {
+  const toggleSidebar = React4.useCallback(() => {
     if (isMobile) {
       setOpenMobile((open2) => !open2);
     } else {
       setOpen((open2) => !open2);
     }
   }, [isMobile, setOpen, setOpenMobile]);
-  React3.useEffect(() => {
+  React4.useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
@@ -1376,11 +1414,11 @@ function SidebarProvider({
     };
   }, [toggleSidebar]);
   const state = open ? "expanded" : "collapsed";
-  const stateValue = React3.useMemo(
+  const stateValue = React4.useMemo(
     () => ({ state, open, isMobile, openMobile }),
     [state, open, isMobile, openMobile]
   );
-  const actionsValue = React3.useMemo(
+  const actionsValue = React4.useMemo(
     () => ({ setOpen, setOpenMobile, toggleSidebar }),
     [setOpen, setOpenMobile, toggleSidebar]
   );
@@ -1801,7 +1839,7 @@ function SidebarMenuSkeleton({
   showIcon = false,
   ...props
 }) {
-  const width = React3.useMemo(() => {
+  const width = React4.useMemo(() => {
     return `${String(Math.floor(Math.random() * 40) + 50)}%`;
   }, []);
   return /* @__PURE__ */ jsxs18(
@@ -1977,7 +2015,7 @@ function ButtonTabNav({ value, onValueChange, items, ariaLabel }) {
 
 // src/components/table.tsx
 import { ArrowDown, ArrowUp, ChevronRight as ChevronRight2, ChevronsUpDown } from "lucide-react";
-import { Fragment as Fragment4, jsx as jsx32, jsxs as jsxs21 } from "react/jsx-runtime";
+import { Fragment as Fragment5, jsx as jsx32, jsxs as jsxs21 } from "react/jsx-runtime";
 var ALIGN_CLASS = {
   left: "text-left",
   right: "text-right",
@@ -2083,7 +2121,7 @@ function ExpandableRow({
   className,
   detailClassName
 }) {
-  return /* @__PURE__ */ jsxs21(Fragment4, { children: [
+  return /* @__PURE__ */ jsxs21(Fragment5, { children: [
     /* @__PURE__ */ jsxs21(TableRow, { className: cn("cursor-pointer", className), "aria-expanded": expanded, onClick: onToggle, children: [
       /* @__PURE__ */ jsx32(TableCell, { className: "w-6 pr-0", children: /* @__PURE__ */ jsx32(
         ChevronRight2,

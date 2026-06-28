@@ -1,4 +1,4 @@
-import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from 'lucide-react';
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon, type LucideIcon } from 'lucide-react';
 import { Select as SelectPrimitive } from 'radix-ui';
 import * as React from 'react';
 import { cn } from '../lib/utils';
@@ -136,6 +136,34 @@ function SelectScrollDownButton({
   );
 }
 
+// Visible group header. Names a section of options (e.g. "Organisation",
+// "Teams") so grouped options read as a hierarchy, not a flat list. Matches the
+// app's section-label convention (text-sm, muted, sentence case). Renders an
+// optional leading glyph passed via the group.
+function SelectLabel({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>) {
+  return (
+    <SelectPrimitive.Label
+      data-slot="select-label"
+      className={cn(
+        "text-muted-foreground flex items-center gap-1.5 px-2 pt-1.5 pb-1 text-sm font-medium [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+// Hairline divider between groups.
+function SelectSeparator({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+  return (
+    <SelectPrimitive.Separator
+      data-slot="select-separator"
+      className={cn('bg-border pointer-events-none my-1 h-px', className)}
+      {...props}
+    />
+  );
+}
+
 // ── Public wrapper (the only exported component) ────────────────────────────
 
 // Radix Select.Item forbids empty-string values, so we swap them for a sentinel.
@@ -145,11 +173,15 @@ interface DropdownSelectOption<T extends string = string> {
   value: T;
   label: string | React.ReactNode;
   className?: string;
+  /** Optional leading glyph; mirrors into the trigger when this option is selected. */
+  icon?: LucideIcon;
 }
 
 interface DropdownSelectGroup<T extends string = string> {
   label: string;
   options: DropdownSelectOption<T>[];
+  /** Optional glyph shown beside the group header label. */
+  icon?: LucideIcon;
 }
 
 function isGroup<T extends string>(
@@ -183,8 +215,10 @@ interface DropdownSelectProps<T extends string = string> {
 
 function renderOption<T extends string>(option: DropdownSelectOption<T>): React.JSX.Element {
   const itemValue = toInternalValue(option.value);
+  const Icon = option.icon;
   return (
     <SelectItem key={itemValue} value={itemValue} className={option.className}>
+      {Icon !== undefined && <Icon className="text-muted-foreground size-4 shrink-0" aria-hidden />}
       {option.label}
     </SelectItem>
   );
@@ -222,10 +256,20 @@ function DropdownSelect<T extends string = string>({
       <SelectContent className={contentClassName}>
         {options.map((item, index) => {
           if (isGroup(item)) {
+            const GroupIcon = item.icon;
             return (
-              <SelectGroup key={item.label !== '' ? item.label : String(index)}>
-                {item.options.map(renderOption)}
-              </SelectGroup>
+              <React.Fragment key={item.label !== '' ? item.label : String(index)}>
+                {index > 0 && <SelectSeparator />}
+                <SelectGroup>
+                  {item.label !== '' && (
+                    <SelectLabel>
+                      {GroupIcon !== undefined && <GroupIcon aria-hidden />}
+                      {item.label}
+                    </SelectLabel>
+                  )}
+                  {item.options.map(renderOption)}
+                </SelectGroup>
+              </React.Fragment>
             );
           }
           return renderOption(item);

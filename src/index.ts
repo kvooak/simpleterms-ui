@@ -1,5 +1,6 @@
 export * from './lib/utils';
 export * from './hooks/use-mobile';
+export * from './hooks/use-pagination';
 export * from './components/badge';
 export * from './components/button';
 export * from './components/checkbox';
@@ -18,6 +19,7 @@ export * from './components/metadata-row';
 export * from './components/overview-popover';
 export * from './components/page-header';
 export * from './components/page-layout';
+export * from './components/page-size-select';
 export * from './components/pagination';
 export * from './components/panel';
 export * from './components/popover';

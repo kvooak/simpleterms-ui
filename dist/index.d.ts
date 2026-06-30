@@ -15,6 +15,26 @@ declare function toSlug(name: string): string;
 
 declare function useIsMobile(): boolean;
 
+interface UsePaginationOptions {
+    initialPage?: number;
+    initialPageSize?: number;
+}
+interface UsePaginationResult {
+    page: number;
+    pageSize: number;
+    offset: number;
+    setPage: (page: number) => void;
+    setPageSize: (size: number) => void;
+    reset: () => void;
+    /** Total page count for a given row total (never below 1). */
+    pageCount: (total: number) => number;
+}
+/**
+ * Headless pagination state. Changing the page size resets to the first page.
+ * Pair with the `Pagination` component (display) and `PageSizeSelect` (size control).
+ */
+declare function usePagination(options?: UsePaginationOptions): UsePaginationResult;
+
 declare const badgeVariants: (props?: ({
     variant?: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "info" | "error-soft" | "warning-soft" | "caution-soft" | "retry-soft" | "info-soft" | "success-soft" | "purple-soft" | null | undefined;
     size?: "default" | "sm" | "xs" | null | undefined;
@@ -355,6 +375,17 @@ interface PageLayoutProps {
  */
 declare function PageLayout({ icon, title, subtitle, headerActions, footer, children, }: PageLayoutProps): React.JSX.Element;
 
+interface PageSizeSelectProps {
+    value: number;
+    onChange: (size: number) => void;
+    /** Selectable page sizes. Default: [20, 50, 100, 200, 500]. */
+    options?: number[];
+    /** Accessible label for the control. Default: "Rows per page". */
+    label?: string;
+    className?: string;
+}
+declare function PageSizeSelect({ value, onChange, options, label, className, }: PageSizeSelectProps): React$1.JSX.Element;
+
 interface PaginationProps {
     page: number;
     totalPages: number;
@@ -603,4 +634,4 @@ declare function TabsContent({ className, ...props }: React$1.ComponentProps<typ
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<'textarea'>): React$1.JSX.Element;
 
-export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, CheckboxField, type CheckboxFieldProps, type CheckboxFieldVariant, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, SearchInput, type SearchInputProps, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, cn, getErrorMessage, toSlug, useIsMobile, useSidebar, useSidebarActions };
+export { ActionButton, Badge, ButtonTabNav, type CellAlign, Checkbox, CheckboxField, type CheckboxFieldProps, type CheckboxFieldVariant, ChipInput, type ChipInputProps, Collapsible, CollapsibleContent, CollapsibleSection, type CollapsibleSectionProps, CollapsibleTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownSelect, type DropdownSelectGroup, type DropdownSelectOption, type DropdownSelectProps, EmptyState, ExpandableRow, Field, type FieldProps, IconButton, InfoPopover, Input, Label, LinkButton, LogBoard, type LogBoardColumn, type LogBoardPaging, type LogBoardRowContext, MetadataRow, OverviewPopover, OverviewSection, OverviewStatRow, PageHeader, PageLayout, PageSizeSelect, type PageSizeSelectProps, Pagination, Panel, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, RowButton, SearchInput, type SearchInputProps, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, type SortDirection, SortableTableHead, StandardButton, StatCard, Switch, TabNav, Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, type UsePaginationOptions, type UsePaginationResult, cn, getErrorMessage, toSlug, useIsMobile, usePagination, useSidebar, useSidebarActions };

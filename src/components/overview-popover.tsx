@@ -78,7 +78,7 @@ export function OverviewPopover({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <StandardButton size="xs" disabled={disabled}>
+        <StandardButton size="sm" disabled={disabled}>
           <Icon className="size-3" />
           {label}
           {badge !== undefined && <span className="text-muted-foreground tabular-nums">{badge}</span>}

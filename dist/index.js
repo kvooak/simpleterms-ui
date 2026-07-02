@@ -896,7 +896,7 @@ function OverviewPopover({
   children
 }) {
   return /* @__PURE__ */ jsxs11(Popover, { children: [
-    /* @__PURE__ */ jsx18(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ jsxs11(StandardButton, { size: "xs", disabled, children: [
+    /* @__PURE__ */ jsx18(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ jsxs11(StandardButton, { size: "sm", disabled, children: [
       /* @__PURE__ */ jsx18(Icon, { className: "size-3" }),
       label,
       badge !== void 0 && /* @__PURE__ */ jsx18("span", { className: "text-muted-foreground tabular-nums", children: badge })
